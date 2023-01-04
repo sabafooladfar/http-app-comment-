@@ -17,6 +17,7 @@
   justify-content: space-around;
   align-items: center;
   margin: 10px;
+  flex-wrap: wrap;
 }
 .comment{
   display: flex;

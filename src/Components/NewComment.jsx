@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
 
-const NewComment = () => {
+const NewComment = ({ setComments }) => {
   const [comment, setComment] = useState({
     name: "",
     email: "",
-    content: "",
+    body: "",
   });
   const nameChangeHandler = (e) => {
     setComment({ ...comment, name: e.target.value });
@@ -13,17 +13,18 @@ const NewComment = () => {
   const emailChangeHandler = (e) => {
     setComment({ ...comment, email: e.target.value });
   };
-  const contentChangeHandler = (e) => {
-    setComment({ ...comment, content: e.target.value });
+  const bodyChangeHandler = (e) => {
+    setComment({ ...comment, body: e.target.value });
   };
   const postCommentHandler = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/comments", {
+      .post("/comments", {
         ...comment,
         postId: 10,
       })
-      .then((res) => console.log(res.data))
+      .then(() => axios.get("/comments"))
+      .then((res) => setComments(res.data))
       .catch();
   };
   return (
@@ -45,7 +46,7 @@ const NewComment = () => {
             id=""
             cols="25"
             rows="5"
-            onChange={(e) => contentChangeHandler(e)}
+            onChange={(e) => bodyChangeHandler(e)}
           ></textarea>
         </div>
         <button onClick={postCommentHandler}>Add New Comment</button>
