@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const NewComment = ({ setComments }) => {
+const NewComment = () => {
+  const navigate = useNavigate();
   const [comment, setComment] = useState({
     name: "",
     email: "",
@@ -23,8 +25,10 @@ const NewComment = ({ setComments }) => {
         ...comment,
         postId: 10,
       })
-      .then(() => axios.get("/comments"))
-      .then((res) => setComments(res.data))
+      .then(() => {
+        navigate("/");
+        axios.get("/comments");
+      })
       .catch();
   };
   return (

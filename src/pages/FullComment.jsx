@@ -1,27 +1,29 @@
 import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
-const FullComment = ({ commentId, setComments,setSelectedId }) => {
-  // console.log(commentId);
+const FullComment = () => {
+  const commentId = useParams().id;
+  const navigate = useNavigate();
   const [comment, setComment] = useState(null);
   useEffect(() => {
     if (commentId) {
       axios
         .get(`/comments/${commentId}`)
-        .then((res) => setComment(res.data))
+        .then((res) => {
+          setComment(res.data);
+        })
         .catch();
-    }
-  }, [commentId]);
-  const deleteHandler = (e) => {
-    e.preventDefault();
-    axios
+      }
+    }, [commentId]);
+    const deleteHandler = (e) => {
+      e.preventDefault();
+      axios
       .delete(`/comments/${commentId}`)
-      .then(() => axios.get("/comments"))
-      .then((res) => {
-        setComments(res.data);
-        setSelectedId(null);
+      .then(() => {
         setComment(null);
+        navigate("/");
       })
       .catch((err) => console.log(err));
   };

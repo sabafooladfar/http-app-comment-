@@ -27,6 +27,20 @@
       "name": "vero eaque aliquid doloribus et culpa",
       "email": "Hayden@althea.biz",
       "body": "harum non quasi et ratione\ntempore iure ex voluptates in ratione\nharum architecto fugit inventore cupiditate\nvoluptates magni quo et"
+    },
+    {
+      "name": "saba",
+      "email": "saba@ex.com",
+      "body": "thank you!",
+      "postId": 10,
+      "id": 6
+    },
+    {
+      "name": "amir",
+      "email": "amir@ex.com",
+      "body": "so bad",
+      "postId": 10,
+      "id": 7
     }
   ]
 }

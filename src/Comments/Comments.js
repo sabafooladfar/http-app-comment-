@@ -1,26 +1,15 @@
 import { useEffect, useState } from "react";
-import Comment from "../Components/Comment";
-import FullComment from "../Components/FullComment";
+import Comment from "./Comment/Comment";
+import FullComment from "../pages/FullComment";
 import NewComment from "../Components/NewComment";
 import { toast } from "react-toastify";
 import { getAllComments } from "../services/getAllCommentsService";
+import { Link } from "react-router-dom";
 
-const Discussion = () => {
+const CommentList = () => {
   const [comments, setComments] = useState(null);
-  const [selectedId, setSelectedId] = useState(null);
   const [error, setError] = useState(false);
 
-  useEffect(() => {
-    // axios
-    //   .get("http://jsonplaceholder.typicode.com/comments")
-    //   .then((response) => {
-    //     setComments(response.data.slice(0, 4));
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    getComments();
-  }, []);
   async function getComments() {
     try {
       const { data } = await getAllComments();
@@ -29,10 +18,8 @@ const Discussion = () => {
       setError(true);
     }
   }
-  const selectCommentHandler = (id) => {
-    // console.log(id);
-    setSelectedId(id);
-  };
+  getComments();
+
   const renderComment = () => {
     let renderValue = <p>loading ...</p>;
     if (error) {
@@ -41,12 +28,14 @@ const Discussion = () => {
     }
     if (comments && !error) {
       renderValue = comments.map((c) => (
+        <Link to={`/comment/${c.id}`} key={c.id}>
         <Comment
-          key={c.id}
+         
           name={c.name}
           email={c.email}
-          onClick={() => selectCommentHandler(c.id)}
+          
         />
+        </Link>
       ));
     }
     return renderValue;
@@ -55,15 +44,8 @@ const Discussion = () => {
   return (
     <div className="container">
       <section className="commentContainer">{renderComment()}</section>
-      <section className="FullCommentContainer">
-        {/* <h3>Full Comment</h3> */}
-        <FullComment commentId={selectedId} setComments={setComments} setSelectedId={setSelectedId} />
-      </section>
-      <section className="newCommentContainer">
-        <NewComment setComments={setComments} />
-      </section>
     </div>
   );
 };
 
-export default Discussion;
+export default CommentList;
