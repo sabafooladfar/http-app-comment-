@@ -33,7 +33,7 @@ const NewComment = () => {
   };
   return (
     <div>
-      <h3>New Comment</h3>
+      <h3 style={{textAlign:"center", margin:"20px"}}>New Comment</h3>
       <form action="" className="newCommentForm">
         <div>
           <label htmlFor="">name</label>

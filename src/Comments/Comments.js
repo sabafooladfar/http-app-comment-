@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Comment from "./Comment/Comment";
-import FullComment from "../pages/FullComment";
-import NewComment from "../Components/NewComment";
 import { toast } from "react-toastify";
 import { getAllComments } from "../services/getAllCommentsService";
 import { Link } from "react-router-dom";
@@ -29,12 +27,7 @@ const CommentList = () => {
     if (comments && !error) {
       renderValue = comments.map((c) => (
         <Link to={`/comment/${c.id}`} key={c.id}>
-        <Comment
-         
-          name={c.name}
-          email={c.email}
-          
-        />
+          <Comment name={c.name} email={c.email} />
         </Link>
       ));
     }

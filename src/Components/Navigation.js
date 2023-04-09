@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 const Navigation = () => {
   return (
-    <nav>
-      <ul>
+    <nav className="nav">
+      <ul className="menu">
         <li>
           <Link to="/">Home</Link>
         </li>
